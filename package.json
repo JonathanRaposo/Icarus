@@ -9,7 +9,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jonathan Raposo",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
