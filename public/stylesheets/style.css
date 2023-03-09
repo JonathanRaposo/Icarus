@@ -177,22 +177,10 @@ a {
     background-color:#1d611d;
     cursor: pointer;
 }
-/* .books-heading {
-    
-    text-align: center;
-   
-  
-}
-.books-heading span{
-    background-color: rgb(169, 73, 5);
-    color: #fff;
-    padding: 4px 8px;
-    border-radius: 10px;
 
-} */
 .booklist-container{
     max-width: 1300px;
-    margin: 0 auto;
+    margin: 30px auto;
     display:flex;
    justify-content:center;
     flex-wrap: wrap;
@@ -447,10 +435,10 @@ textarea{
     margin: 0 auto 30px auto;
     padding: 10px;
     border-radius: 16px;
-    color: #fff;
-    text-shadow: 0 3px 4px #000;
+    color: coral;
+    text-shadow: 0 2px 3px #000;
     text-align: center;
-    background-color: rgb(180, 84, 16);
+  
 
 }
 .edit-btn {
@@ -511,6 +499,7 @@ textarea{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
     width: 100%;
     padding: 300px 0;
     text-align: center;
