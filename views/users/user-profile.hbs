@@ -1,0 +1,31 @@
+<div class="user-profile-hero">
+
+
+{{#if user}}
+
+<h2 class="welcome-heading"><span>Welcome {{user.firstName}}</span></h2>
+ 
+ {{else}}
+<h2 class="welcome-heading"><span>No user logged in</span></h2>
+ 
+{{/if}}
+
+
+</div>
+  <div class="user-books">
+
+{{#if user.books}}
+     <h2 class="user-books-heading">Your book list:</h2>
+
+   {{#each user.books}}
+
+     <a href="/books/{{this._id}}">
+     <h3>{{this.title}} 📙</h3>
+     </a>
+   {{/each}}
+   {{else}}
+     <h2 class="user-books-heading">No Books added to Your list yet</h2>
+
+    
+{{/if}}
+  </div>

@@ -1,0 +1,19 @@
+<div class="user-book-list-hero"></div>
+  
+  <div class="user-books">
+
+{{#if user.books}}
+     <h2 class="user-books-heading">{{user.firstName}}'s book list:</h2>
+
+   {{#each user.books}}
+
+     <a href="/books/{{this._id}}">
+     <h3>{{this.title}} 📙</h3>
+     </a>
+   {{/each}}
+   {{else}}
+     <h2 class="user-books-heading">No Books added  yet</h2>
+
+    
+{{/if}}
+  </div>

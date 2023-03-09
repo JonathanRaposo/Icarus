@@ -1,0 +1,28 @@
+
+<div class="edit-book-container">
+
+
+<h2 class="edit-heading">Edit the book: {{book.title}}</h2>
+
+<form action="/books/edit?bookId={{book._id}}" method="POST" class="edit-book-form">
+  
+  <label for="image-url">Book cover</label>
+  <input type="text" id="image-url" name="image_Url" value="{{book.image_Url}}"/>
+   
+   <label for="title">Title</label>
+   <input type="text" id="title" name="title" value="{{book.title}}"/>
+   
+   <label for="author">Author</label>
+   <input type="text" id="author" name="author" value="{{book.author}}"/>
+
+   <label for="description">Description</label>
+   <textarea id="description" name="description" cols="30" rows="4" >{{book.description}}</textarea>
+
+   <label for="rate">Rate</label>
+   <input type="number" id="rate" name="rating" min="1" max="10" value="{{book.rating}}"/>
+   <button type="submit" class="edit-btn">Save changes</button>
+
+</form>
+
+
+</div>

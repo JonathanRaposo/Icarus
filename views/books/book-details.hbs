@@ -1,0 +1,32 @@
+<div class="book-details">
+        <h2 class="book-details-heading">{{title}}</h2> 
+    <div>
+     
+    <p><strong>Written by:</strong> {{author}}</p> 
+    <p><strong>Summary:</strong> {{description}}</p>
+    <p><strong>Rating:</strong> {{rating}}</p>
+    <a href="/books" class="details-back-link">Back</a>
+     
+    </div>
+
+     <a href="/users/{{user._id}}/books" class="user-book-list">See all books posted by {{user.firstName}}</a>
+
+     <h3 class="add-comment-heading">Add comment</h3>
+
+     <form action="/books/{{_id}}/comment" method="POST" class="comment-form">
+       <textarea name="content"  cols="30" rows="2"></textarea>
+       <button type="submit" class="post-btn">Post</button>
+     </form>
+
+
+  
+</div>
+
+  {{#unless comments}}
+    <p class="no-comment-para">No comments</p>
+    {{/unless}}
+
+    {{#each comments}}
+    <p class="comment-para"><span>{{this.user.firstName}}</span>  {{this.content}} </p>
+    {{/each}}
+  

@@ -1,0 +1,55 @@
+
+<div class="background-img">
+
+     <form action="/books/search" method="GET" id="search-form">
+     <label for="searchBar" class="searchBar-label">Search for a book</label>
+     <input type="text" name="q" class="search-input-field" id="searchBar" placeholder="Book title or keyword"/>
+     <button type="submit" class="search-form-btn">Search</button>
+     
+     </form>
+
+</div>
+
+<div class='booklist-container'>
+
+ {{#if books}}
+
+
+{{#each books}}
+  <div class="book-info-display-wrapper">
+
+      <div>
+        {{#if image_Url}}
+
+
+          <a href="/books/{{_id}}">
+               <img src ={{image_Url}}/>
+          </a>
+
+         {{else}}
+        <img src="../../images/no-image-icon.png" />
+         {{/if}}
+
+      </div>
+
+      <div class="inner-content">
+        <h3>{{this.title}}</h3>
+        <p>By: {{this.author}}</p>
+         <a href="/books/{{_id}}">See details</a>
+         <a href="/books/edit?bookId={{_id}}">| Edit</a>
+
+         <form action="/books/{{_id}}/delete" class="delete-form" method="POST">
+          <button class="delete-btn" disabled>Delete</button>
+         </form>
+      </div>
+
+  </div>
+
+{{/each}}
+{{else}}
+<h2>No Books Added</h2>
+
+ {{/if}}
+
+
+</div>

@@ -1,0 +1,27 @@
+
+
+<div class="signup-background">
+    <h2 class="signup-heading">Sign Up</h2>
+
+<form action="/signup" method="POST" class="signup-form">
+   
+   <label for="firstName">First name</label>
+   <input type="text" name="firstName" id="firstName"/>
+
+     <label for="lastName">Last name</label>
+   <input type="text" name="lastName" id="lastName"/> 
+
+      <label for="email">Email</label>
+   <input type="email" name="email" id="email"/>
+
+        <label for="password">Password</label>
+   <input type="password" name="password" id="password"/>
+
+   <button type="submit" class="signup-btn">Sign up</button>
+   <a href="/login" class="login-link">Already have an account?</a>
+    {{#if errorMessage}}
+     <p class="error-message">{{errorMessage}}</p>
+    {{/if}}
+
+</form>
+</div>

@@ -1,0 +1,26 @@
+
+
+
+ <div class="login-background">
+
+        <h2 class="login-heading">Log in</h2>
+<form action="/login" method="POST" class="login-form">
+
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" />
+
+
+
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" />
+
+<button type="submit" class="login-form-btn">Log in</button>
+   <a href="/signup" class="signup-link">Don't have an account?</a>
+
+
+{{#if errorMessage}}
+ <p class="error-message">{{errorMessage}}</p>
+{{/if}}
+
+</form>
+ </div>
