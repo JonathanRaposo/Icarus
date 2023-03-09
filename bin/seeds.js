@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Book = require('../models/Book.model');
 
 
-mongoose.connect('mongodb://localhost/library-project')
+mongoose.connect('mongodb://localhost:27017/Icarus')
     .then((x) => console.log(`Connected to Mongo, database name: ${x.connections[0].name}`))
     .catch((err) => console.log('Error connection to mongo, ', err));
 
