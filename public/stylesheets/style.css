@@ -194,7 +194,7 @@ a {
 
 }
 .book-info-display-wrapper{
-max-width: 500px;
+min-width: 450px;
 height: 300px;
 box-shadow: 0 3px 5px grey;
 padding: 20px;
