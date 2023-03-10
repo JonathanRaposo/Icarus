@@ -3,4 +3,5 @@ Icarus is an interactive social app where users can share their favorite books,m
 
 the live version isn't working right now. however, you can clone this repo and run the app in your localhost.Make sure you have mongodb installed.
 Note: to seed the database , type in node bin/seeds.js in the root folder.
+
 Website URL:https://vast-blue-barnacle-garb.cyclic.app
