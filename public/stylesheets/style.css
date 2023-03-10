@@ -92,7 +92,7 @@ a {
     margin-top: 100px;
  }
  .general-info-wrapper{
-    max-width: 800px;
+    max-width: 700px;
     padding: 6px;
  }
  .general-info-wrapper .info-heading{
@@ -623,16 +623,9 @@ textarea{
 
 html, body{
     height: 100%;
-    /* margin: 0; */
+
 }
-/* .wrapper{
-    min-height: 100%;
-    margin-bottom: -50px;
-} */
-/* .footer,
-.push{
-    height: 50px;
-} */
+
 body{
     display: flex;
     flex-direction: column;
@@ -647,8 +640,9 @@ footer{
     width: 100%;
     border: 1px solid #ccc;
     background-color: rgb(235,235,235);
-    height: 130px;
+    height: 120px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* flex-direction: column; */
@@ -676,7 +670,9 @@ footer ul li:hover a{
     background-color: #1d611d;
 }
 
-
+footer div {
+    padding-left:50px;
+}
 #copy-right{
     font-size: 12px;
     font-family: "Lato", Arial, sans-serif;

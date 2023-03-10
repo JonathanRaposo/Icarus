@@ -73,15 +73,16 @@ router.post('/books/edit', (req, res, next) => {
 //POST route to delete a book 
 
 router.post('/books/:bookId/delete', (req, res, next) => {
-    console.log('book to delete: ', req.params)
+
     const { bookId } = req.params;
+
     Book.findById(bookId)
         .then((bookFromDB) => {
             console.log('book to be deleted: ', bookFromDB);
-            bookFromDB.comments = [];
-            bookFromDB.save()
+
             //get user who posted the book
             const userId = bookFromDB.user;
+
             return User.findByIdAndUpdate(userId, { $pull: { books: bookFromDB._id } })
 
         })
