@@ -82,7 +82,7 @@ router.post('/signup', isLoggedOut, (req, res, next) => {
 
 //GET route -show login form
 
-router.get('/login', (req, res) => {
+router.get('/login', isLoggedOut, (req, res) => {
     res.render('auth/login.hbs');
 });
 
