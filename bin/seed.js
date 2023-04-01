@@ -1,6 +1,5 @@
 require('dotenv').config({ path: '../.env' })
 const books = require('../data/jsonData.json');
-const User = require('..')
 const Book = require('../models/Book.model');
 const mongoose = require('mongoose')
 const connectDB = require('../db/index');
