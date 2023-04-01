@@ -137,7 +137,7 @@ a {
     background-repeat: no-repeat;
     background-attachment: fixed;
     width: 100%;
-    padding: 300px 0;
+    padding: 240px 0;
 
 }
 #search-form {
@@ -508,12 +508,12 @@ textarea{
 }
 
 .user-book-list-hero{
-    background-image: url('../images//lanscape3.jpg');
+    background-image: url('../images//lanscape.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    padding: 300px 0;
+    padding: 330px 0;
     
 }
 .welcome-heading span{

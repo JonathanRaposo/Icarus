@@ -17,7 +17,7 @@ router.get('/signup', isLoggedOut, (req, res, next) => {
 
 //POST route - process form to create user:
 
-router.post('/signup', isLoggedOut, (req, res, next) => {
+router.post('/signup', (req, res, next) => {
     console.log('***form:', req.body)
 
     const { firstName, lastName, email, password } = req.body;
@@ -90,7 +90,7 @@ router.get('/login', isLoggedOut, (req, res) => {
 
 router.post('/login', (req, res, next) => {
 
-
+    console.log(req.body)
     const { email, password } = req.body
 
     // make sure all fields are filled

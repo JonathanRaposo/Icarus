@@ -7,8 +7,11 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const connectDB = require('./db/index');
+
+
 // connect to database
-require('./db/index');
+connectDB()
 
 
 
@@ -23,7 +26,7 @@ app.use(session({
         httpOnly: true,
     },
     store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/Icarus',
+        mongoUrl: process.env.MONGO_URI || 'mongodb://localhost:27017/Icarus',
         ttl: 60 * 60 * 24
     })
 
