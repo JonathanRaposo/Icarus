@@ -60,7 +60,10 @@
                 },
                 {
                 "image_Url":"https://cdn.shopify.com/s/files/1/0104/1203/2085/products/9780007323128_262x.jpg?v=1668019544","title":"The Chronicles of Narnia",
-                "description":"The Chronicles of Narnia is a series of fantasy novels by British author C. S. Lewis. Written by Lewis, illustrated by Pauline Baynes, and originally published in London between 1950 and 1956, The Chronicles of Narnia has been adapted for radio, television, the stage, film, and computer games. The series is set in the fictional realm of Narnia, a fantasy world of magic, mythical beasts, and talking animals. It narrates the adventures of various children who play central roles in the unfolding history of the Narnian world.","author":"C.S. Lewis","rating":8},
+                "description":"The Chronicles of Narnia is a series of fantasy novels by British author C. S. Lewis. Written by Lewis, illustrated by Pauline Baynes, and originally published in London between 1950 and 1956, The Chronicles of Narnia has been adapted for radio, television, the stage, film, and computer games. The series is set in the fictional realm of Narnia, a fantasy world of magic, mythical beasts, and talking animals. It narrates the adventures of various children who play central roles in the unfolding history of the Narnian world.",
+                "author":"C.S. Lewis",
+                "rating":8
+            },
 
                 {
                 "image_Url":"https://pictures.abebooks.com/isbn/9780141036137-us.jpg",
