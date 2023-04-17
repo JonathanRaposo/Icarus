@@ -1,16 +1,21 @@
-<div class="book-details">
-        <h2 class="book-details-heading">{{title}}</h2> 
-    <div>
-     
-    <p><strong>Written by:</strong> {{author}}</p> 
-    <p><strong>Summary:</strong> {{description}}</p>
-    <p><strong>Rating:</strong> {{rating}}</p>
-    <a href="/books" class="details-back-link">Back</a>
-     
-    </div>
+<div class="bookDetails-wrapper">
 
-     <a href="/users/{{user._id}}/books" class="user-book-list">See all books posted by {{user.firstName}}</a>
+      <div class="bookDetails-image-wrapper">
+        <img src={{image_Url}} alt="book cover" class="bookDetails-image"/>
+      </div>
+     
+       <div class="bookDetails-content-wrapper">
+         <h1 class="bookDetails-title">{{title}}</h1>
+         <p class="bookDetails-para">{{description}}</p>
+         <p class="bookDetails-author"><strong>Author :</strong>{{author}}</p>
+         <a href="/users/{{user._id}}/books" class="user-book-list">
+         <p class="user-book-list">See all books posted by {{user.firstName}} {{user.lastName}}</p>
+         </a>
+       </div>
 
+</div>
+
+   
      <h3 class="add-comment-heading">Add comment</h3>
 
      <form action="/books/{{_id}}/comment" method="POST" class="comment-form">
@@ -18,9 +23,6 @@
        <button type="submit" class="post-btn">Post</button>
      </form>
 
-
-  
-</div>
 
   {{#unless comments}}
     <p class="no-comment-para">No comments</p>

@@ -3,11 +3,15 @@
 
 <h2 class="create-book-heading">Share a book</h2>
 
-<form action="/books/create" method="POST" class="create-book-form">
+<form action="/books/create" method="POST" enctype="multipart/form-data" class="create-book-form">
 
 
-  <label for="image-url">Book cover</label>
-  <input type="text" id="image-url" name="image_Url" placeholder="insert image URL"/>
+  <label for="image-cover" class="image-upload-label">Click to upload image 
+    <i class="fa-solid fa-camera"></i>
+ <input type="file" id="image-cover" name="image-cover" />
+
+  </label>
+ 
    
    <label for="title">Title</label>
    <input type="text" id="title" name="title" />

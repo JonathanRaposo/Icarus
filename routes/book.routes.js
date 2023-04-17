@@ -6,26 +6,50 @@ const Comment = require('../models/Comment.model')
 
 const { isLoggedIn } = require('../middleware/route-guard');
 
+// load fileuploader:
+const fileUploader = require('../config/cloudinary.config');
 
-// GET route to display form
+
+// GET route - display form to create book:
+
 router.get('/books/create', isLoggedIn, (req, res) => {
     res.render('books/book-create.hbs');
 })
 
-//POST route to create book
-router.post('/books/create', (req, res, next) => {
+
+
+//POST route - Process form to actually create book:
+
+router.post('/books/create', fileUploader.single('image-cover'), (req, res, next) => {
     console.log('request body: ', req.body);
+    console.log('File object: ', req.file)
 
     const { _id } = req.session.currentUser; // user id
 
-    const { image_Url, title, description, author, rating } = req.body;
+    const { title, description, author, rating } = req.body;
 
     if (!title || !description || !author || !rating) {
-        res.status(400).render('books/book-create.hbs', { errorMessage: 'Title, author, description and rating must be filled.' })
+        res.status(400).render('books/book-create.hbs', { errorMessage: 'Provide itle, author, description and rating.' })
 
     }
 
-    Book.create({ image_Url, title, description, author, rating, user: _id })
+    let imageUrl;
+    if (req.file) {
+        imageUrl = req.file.path;
+    } else {
+        imageUrl = '';
+    }
+
+
+
+    Book.create({
+        image_Url: imageUrl,
+        title,
+        description,
+        author,
+        rating,
+        user: _id
+    })
         .then((bookFromDB) => {
             console.log('New book created: ', bookFromDB);
 
@@ -42,7 +66,7 @@ router.post('/books/create', (req, res, next) => {
 
 })
 
-// GET route to display the form to update a specific book
+// GET route -display the form to update a specific book:
 
 router.get('/books/edit', isLoggedIn, (req, res, next) => {
 
@@ -57,20 +81,44 @@ router.get('/books/edit', isLoggedIn, (req, res, next) => {
             next(err)
         });
 })
-// POST route to actually make udpates on a specific book
+// POST route - process the form to update a specific book
 
-router.post('/books/edit', (req, res, next) => {
-
+router.post('/books/edit', fileUploader.single('image-cover'), (req, res, next) => {
+    console.log('Query params: ', req.query);
+    console.log('File object:', req.file)
+    console.log('request Body: ', req.body)
 
     const { bookId } = req.query;
+    const { title, author, description, existingImage } = req.body;
 
-    Book.findByIdAndUpdate(bookId, req.body, { new: true })
+    if (!title || !description || !author) {
+        res.render('books/book-edit.hbs', { errorMessage: 'Provide title, author and description.' });
+        return;
+    }
+    let imageUrl;
+
+    if (req.file) {
+        imageUrl = req.file.path;
+    } else {
+        imageUrl = existingImage;
+    }
+    Book.findByIdAndUpdate(bookId,
+        {
+            title,
+            author,
+            description,
+            image_Url: imageUrl
+        },
+        { new: true })
         .then((updatedBook) => {
             res.redirect(`/books/${updatedBook._id}`)
         })
         .catch((err) => next(err));
 });
-//POST route to delete a book 
+
+
+
+//POST route -  delete a book 
 
 router.post('/books/:bookId/delete', (req, res, next) => {
 
@@ -95,13 +143,12 @@ router.post('/books/:bookId/delete', (req, res, next) => {
         .catch((err) => next(err));
 });
 
-// GET route to retrieve all books
+//  GET route - retrieve all books
 router.get('/books', (req, res, next) => {
 
     Book.find()
         .populate('user')
         .then((booksFromDB) => {
-            console.log('====>books: ', booksFromDB)
             res.render('books/books-list.hbs', { books: booksFromDB })
         })
         .catch((err) => {
@@ -137,7 +184,7 @@ router.get('/books/search', (req, res, next) => {
 
 
 
-// GET route to retrieve a specific books
+// GET route - retrieve a specific books
 
 router.get('/books/:bookId', (req, res, next) => {
 
@@ -163,6 +210,7 @@ router.get('/books/:bookId', (req, res, next) => {
         })
 })
 
+//  POSt- to make comments:
 router.post('/books/:bookId/comment', isLoggedIn, (req, res, next) => {
 
 
