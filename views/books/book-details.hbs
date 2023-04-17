@@ -8,9 +8,14 @@
          <h1 class="bookDetails-title">{{title}}</h1>
          <p class="bookDetails-para">{{description}}</p>
          <p class="bookDetails-author"><strong>Author :</strong>{{author}}</p>
-         <a href="/users/{{user._id}}/books" class="user-book-list">
+         {{!-- <a href="/users/{{user._id}}/books" class="user-book-list-link">
          <p class="user-book-list">See all books posted by {{user.firstName}} {{user.lastName}}</p>
-         </a>
+         </a> --}}
+           <p class="user-book-list">
+               <a href="/users/{{user._id}}/books" class="user-list-link">
+                  See all books posted by {{user.firstName}} {{user.lastName}}
+              </a>
+           </p>
        </div>
 
 </div>

@@ -240,7 +240,9 @@ background-color:#fff;
 .delete-form{
     margin-top: 40px;
 }
+
 /* book details page styles */
+
 .bookDetails-wrapper{
     margin-top: 50px;
     padding: 10px;
@@ -255,7 +257,6 @@ background-color:#fff;
 
 }
 .bookDetails-content-wrapper{
-
     padding: 20px;
 }
 
@@ -269,13 +270,23 @@ background-color:#fff;
     font-size: 1.2em;
     text-align: justify;
 }
+/* paragraph */
 .user-book-list{
+    max-width: 500px;
+}
+/* Anchor tag */
+.user-list-link{
+    max-width: 500px;
     font-size: 1.2em;
     color:rgb(232, 102, 55);
-    transition: text-decoration .15s;
+    border-radius: 2px;
+    transition: background-color .15s;
+    padding: 10px;
+
 }
-.user-book-list:hover{
-    text-decoration: underline;
+.user-book-list:hover .user-list-link {
+    background-color:rgb(232, 102, 55) ;
+    color: #fff;
 }
 
 /* end of book details page styles */
@@ -618,7 +629,7 @@ textarea{
    
   }
   .user-books h3{
-      color:rgb(169, 73, 5);
+      color:rgb(232, 102, 55);
       transition: letter-spacing .15s;
   }
   .user-books h3:hover{
