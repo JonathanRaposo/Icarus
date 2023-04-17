@@ -210,28 +210,5 @@ router.get('/books/:bookId', (req, res, next) => {
         })
 })
 
-//  POSt- to make comments:
-router.post('/books/:bookId/comment', isLoggedIn, (req, res, next) => {
-
-
-    const { bookId } = req.params;   // book id
-    const { content } = req.body;   // comment;
-    const userId = req.session.currentUser._id; // user id
-
-
-    Comment.create({ content, user: userId })
-        .then((commentFromDB) => {
-            return Book.findByIdAndUpdate(bookId, { $push: { comments: commentFromDB._id } });
-        })
-        .then((updatedBook) => {
-            res.redirect(`/books/${updatedBook._id}`);
-        })
-        .catch((err) => {
-            console.log('Error while creating comment: ', err);
-            next(err);
-        });
-
-
-});
 
 module.exports = router;

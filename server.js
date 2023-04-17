@@ -68,6 +68,9 @@ app.use('/', authRoutes);
 const userRoutes = require('./routes/user.routes');
 app.use('/', userRoutes);
 
+const commentRoutes = require('./routes/comment.routes');
+app.use('/', commentRoutes);
+
 
 
 // this middleware runs whenever requested page is not available 
