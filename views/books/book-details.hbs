@@ -1,19 +1,17 @@
+{{#if book}}
 <div class="bookDetails-wrapper">
 
       <div class="bookDetails-image-wrapper">
-        <img src={{image_Url}} alt="book cover" class="bookDetails-image"/>
+        <img src={{book.image_Url}} alt="book cover" class="bookDetails-image"/>
       </div>
      
        <div class="bookDetails-content-wrapper">
-         <h1 class="bookDetails-title">{{title}}</h1>
-         <p class="bookDetails-para">{{description}}</p>
-         <p class="bookDetails-author"><strong>Author :</strong>{{author}}</p>
-         {{!-- <a href="/users/{{user._id}}/books" class="user-book-list-link">
-         <p class="user-book-list">See all books posted by {{user.firstName}} {{user.lastName}}</p>
-         </a> --}}
+         <h1 class="bookDetails-title">{{book.title}}</h1>
+         <p class="bookDetails-para">{{book.description}}</p>
+         <p class="bookDetails-author"><strong>Author :</strong> {{book.author}}</p>
            <p class="user-book-list">
-               <a href="/users/{{user._id}}/books" class="user-list-link">
-                  See all books posted by {{user.firstName}} {{user.lastName}}
+               <a href="/users/{{book.user._id}}/books" class="user-list-link">
+                  See all books posted by {{book.user.firstName}} {{book.user.lastName}}
               </a>
            </p>
        </div>
@@ -23,17 +21,39 @@
    
      <h3 class="add-comment-heading">Add comment</h3>
 
-     <form action="/books/{{_id}}/comment" method="POST" class="comment-form">
+     <form action="/books/{{book._id}}/comment" method="POST" class="comment-form">
        <textarea name="content"  cols="30" rows="2"></textarea>
        <button type="submit" class="post-btn">Post</button>
      </form>
 
 
-  {{#unless comments}}
+  {{#unless book.comments}}
     <p class="no-comment-para">No comments</p>
     {{/unless}}
 
-    {{#each comments}}
-    <p class="comment-para"><span>{{this.user.firstName}}</span>  {{this.content}} </p>
+    {{#each book.comments}}
+ 
+     <div class="comment-wrapper">
+       <div class="comment-image-wrapper">
+          {{#if user.profile_image}}
+              <img src={{user.profile_image}} class="comment-profile-image"/>
+              {{else}}
+              <img src='../../images/blank-pic.webp' class="comment-profile-image"/> 
+
+          {{/if}}
+       </div>
+           <div class="comment-content-wrapper">
+           <p class="comment-text">{{this.content}} </p>
+            <span class="user-name-tag">
+              <a href="/users/{{this.user._id}}/books">
+                 {{this.user.firstName}} {{this.user.lastName}}  
+              </a>
+            </span>
+           </div>
+           
+     </div>
     {{/each}}
+    {{else}}
+    <h2 class="detailsPage-no-results">No Books Added</h2>
+    {{/if}}
   

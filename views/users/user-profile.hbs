@@ -1,27 +1,64 @@
 <div class="user-profile-hero">
 
 
-{{#if user}}
+   {{#if user}}
 
-<h2 class="welcome-heading"><span>Welcome  {{user.firstName}}</span></h2>
+       <h2 class="welcome-heading"><span>Welcome  {{user.firstName}}</span></h2>
  
- {{else}}
-<h2 class="welcome-heading"><span>No user logged in</span></h2>
+       {{else}}
+     <h2 class="welcome-heading"><span>User is not logged in</span></h2>
  
-{{/if}}
-
+  {{/if}}
 
 </div>
+
+ 
+ <div class="profile-container">
+
+   
+  <div class="profileImage-form-wrapper">
+       <div class="profileImage-wrapper">
+         {{#if user.profile_image}}
+            <img src={{user.profile_image}} class="user-profile-picture"/>
+            {{else}}
+             <img src='../../images/blank-pic.webp' class="user-profile-picture"/>
+         {{/if}}
+       </div>
+       <form action="users/{{user._id}}/profileImage" method="POST" enctype="multipart/form-data" class="imageUpload-form">
+
+             {{#if user.profile_image}}
+                      <label for="profile-image" class="add-profileImage">Change profile image
+                      <i class="fa-solid fa-camera"></i>
+                     <input type="file" name="profile-image" id="profile-image">
+                     </label>
+                    {{else}}
+                        <label for="profile-image" class="add-profileImage">Add a profile image
+                          <i class="fa-solid fa-camera"></i>
+                          <input type="file" name="profile-image" id="profile-image">
+                       </label>
+               {{/if}}
+            <button type="submit" class="upload-btn">Add</button>
+            
+             {{#if errorMessage}}
+             <p class="error-message">{{errorMessage}}</p>
+             {{/if}}
+
+       </form>
+  </div>
+
+
   <div class="user-books">
 
-{{#if user.books}}
-     <h2 class="user-books-heading">Your book list:</h2>
+    {{#if user.books}}
+        <h2 class="user-books-heading">Your book list:</h2>
 
-   {{#each user.books}}
-
-     <a href="/books/{{this._id}}">
-     <h3>{{this.title}} 📙</h3>
-     </a>
+    {{#each user.books}}
+        <h3 class="userProfile-book-list-link">
+          <a href="/books/{{this._id}}">
+            {{this.title}} 📙
+          </a>
+        </h3>
+       
    {{/each}}
    {{else}}
      <h2 class="user-books-heading">No Books added to Your list yet</h2>
@@ -29,3 +66,4 @@
     
 {{/if}}
   </div>
+ </div>

@@ -50,6 +50,7 @@ router.post('/signup', (req, res, next) => {
     const hashPassword = bycript.hashSync(password, salt);
 
     User.create({
+        profile_image: '',
         firstName,
         lastName,
         email,
@@ -90,7 +91,6 @@ router.get('/login', isLoggedOut, (req, res) => {
 
 router.post('/login', (req, res, next) => {
 
-    console.log(req.body)
     const { email, password } = req.body
 
     // make sure all fields are filled

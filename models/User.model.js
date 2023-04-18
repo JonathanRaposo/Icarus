@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
     {
+        profile_image: String,
         firstName: String,
         lastName: String,
 
@@ -17,7 +18,8 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: [true, '>>>mongoose error:Password is required.']
         },
-        books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
+        books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
+        books_id: []
     },
 
     {

@@ -50,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 const capitalize = require('./utils/capitalize');
-app.locals.appTitle = capitalize('Icarus');
+app.locals.appTitle = capitalize('icarus');
 app.locals.year = new Date().getFullYear();
 
 // add routes here

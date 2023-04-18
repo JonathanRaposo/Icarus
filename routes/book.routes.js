@@ -2,13 +2,16 @@ const express = require('express');
 const router = express.Router()
 const Book = require('../models/Book.model');
 const User = require('../models/User.model');
-const Comment = require('../models/Comment.model')
+const Comment = require('../models/Comment.model');
 
+// load middlware to protect routes:
 const { isLoggedIn } = require('../middleware/route-guard');
 
 // load fileuploader:
 const fileUploader = require('../config/cloudinary.config');
 
+// load id generator: 
+const { v4: uuuidV4 } = require('uuid');
 
 // GET route - display form to create book:
 
@@ -41,19 +44,26 @@ router.post('/books/create', fileUploader.single('image-cover'), (req, res, next
     }
 
 
-
+    let newBook;
     Book.create({
         image_Url: imageUrl,
         title,
         description,
         author,
         rating,
-        user: _id
+        user: _id,
+        book_id: uuuidV4()
     })
         .then((bookFromDB) => {
             console.log('New book created: ', bookFromDB);
+            newBook = bookFromDB;
 
             return User.findByIdAndUpdate(_id, { $push: { books: bookFromDB._id } })
+        })
+        .then(() => {
+            return User.findByIdAndUpdate(_id, { $push: { books_id: newBook.book_id } })
+
+
         })
         .then(() => {
             res.redirect('/books')
@@ -120,35 +130,69 @@ router.post('/books/edit', fileUploader.single('image-cover'), (req, res, next) 
 
 //POST route -  delete a book 
 
-router.post('/books/:bookId/delete', (req, res, next) => {
+router.post('/books/delete', (req, res, next) => {
 
-    const { bookId } = req.params;
+    console.log('Query Params: ', req.query)
+    const { original } = req.query;
+    const { custom } = req.query;
+    const { _id } = req.session.currentUser;
+    console.log('current user id: ', _id)
 
-    Book.findById(bookId)
-        .then((bookFromDB) => {
-            console.log('book to be deleted: ', bookFromDB);
+    let user_FromDB;
+    User.findById(_id)
+        .populate('books')
+        .then((userfromDB) => {
+            user_FromDB = userfromDB;
+            console.log('current user info: ', userfromDB)
+            const books = userfromDB.books;
 
-            //get user who posted the book
-            const userId = bookFromDB.user;
+            for (let i = 0; i < books.length; i++) {
+                if (books[i].book_id === custom) {
+                    let book_fromDB
+                    Book.findById(original)
+                        .then((bookFromDB) => {
+                            book_fromDB = bookFromDB;
+                            return User.findByIdAndUpdate(_id, { $pull: { books: bookFromDB._id } })
+                        })
+                        .then(() => {
 
-            return User.findByIdAndUpdate(userId, { $pull: { books: bookFromDB._id } })
+                            return User.findByIdAndUpdate(_id, { $pull: { books_id: book_fromDB.book_id } })
+                        })
+                        .then(() => {
+                            return Book.findByIdAndRemove(original)
+
+                        })
+                        .then(() => {
+                            console.log(`Book # ${original} was removed`)
+                            res.redirect('/books')
+                        })
+                    return;
+                } else if (books[i].book_id !== custom) {
+                    console.log('You are not authorized to delete this book.')
+                    res.render('books/book-unauthorized.hbs');
+                    return;
+
+
+                } else if (user_FromDB.books === 0) {
+                    return;
+                }
+            }
 
         })
-        .then(() => {
-            return Book.findByIdAndRemove(bookId)
+        .catch((err) => {
+            console.log('Error while deleting book: ', err);
+            next(err)
         })
-        .then(() => {
-            res.redirect('/books');
-        })
-        .catch((err) => next(err));
+
 });
 
 //  GET route - retrieve all books
 router.get('/books', (req, res, next) => {
 
     Book.find()
-        .populate('user')
+        .populate('user comments')
         .then((booksFromDB) => {
+            console.log('Book list: ', booksFromDB)
             res.render('books/books-list.hbs', { books: booksFromDB })
         })
         .catch((err) => {
@@ -201,8 +245,8 @@ router.get('/books/:bookId', (req, res, next) => {
             }
         })
         .then((theBook) => {
-            console.log('details ======>', theBook)
-            res.render('books/book-details.hbs', theBook)
+            console.log('Book details ===>>>:', theBook)
+            res.render('books/book-details.hbs', { book: theBook })
         })
         .catch((err) => {
             console.log('Error while retrieving book details: ', err);

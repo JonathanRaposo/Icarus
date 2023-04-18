@@ -38,8 +38,9 @@
          <a href="/books/{{_id}}">See details</a>
          <a href="/books/edit?bookId={{_id}}">| Edit</a>
 
-         <form action="/books/{{_id}}/delete" class="delete-form" method="POST">
+         <form action="/books/delete?original={{_id}}&custom={{book_id}}" class="delete-form" method="POST">
           <button class="delete-btn" >Delete</button>
+       
          </form>
       </div>
    
