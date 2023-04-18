@@ -322,6 +322,8 @@ background-color:#fff;
 .comment-profile-image{
     width: 70px;
     height: 70px;
+    object-fit: cover;
+
     border-radius: 50%;
     padding: 12px;
 }
@@ -580,7 +582,7 @@ textarea{
     font-family:'Poppins', sans-serif;
 }
 .edit-btn:hover{
-    background-color: #113811;
+    background-color: #218321;
 }
 
 .edit-book-container{
@@ -689,6 +691,7 @@ textarea{
     width: 100px;
     height: 100px;
     border-radius: 50%;
+
 }
 
 #profile-image{
@@ -746,7 +749,7 @@ textarea{
      text-shadow: 0 1px 2px #000; 
     letter-spacing: 1px;
 }
-.backt-to-books-link{
+.back-to-books-link{
     color:#1d611d;
     font-size: 1.5em;
     font-weight: 600;
@@ -783,10 +786,12 @@ footer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* flex-direction: column; */
+    
 }
 footer ul{
     list-style-type: none;
+    margin-top: 18px;
+    margin-bottom: 0;
 }
 footer ul li {
     width: 85px;
@@ -797,23 +802,33 @@ footer ul li {
     border-radius:16px;
     font-size: 1em;
     font-weight: 500;
-    transition: background-color .15s;
 }
-footer ul li:hover{
-   background-color: #1d611d;
 
+footer ul li:hover a{
+    transition: text-decoration .15s;
 }
 footer ul li:hover a{
-    color: #fff;
-    background-color: #1d611d;
+    text-decoration: underline;
 }
+/* social media styles */
+.social-media-wrapper{
+ text-align: center;
+}
+.social-media-wrapper .icon{
+    font-size: 1.7em;
+    padding: 10px 10px 16px 10px;
+    transition:color .15s;
 
-footer div {
-    padding-left:50px;
+}
+.social-media-wrapper .icon:hover{
+    color: coral;
+}
+.fa-linkedin{
+    margin-left: 50px;
 }
 #copy-right{
+    margin: 0 auto 8px 30px;
     font-size: 12px;
-    font-family: "Lato", Arial, sans-serif;
     color: #1d611d;
    
   
