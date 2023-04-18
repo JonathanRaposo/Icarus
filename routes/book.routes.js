@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router()
 const Book = require('../models/Book.model');
 const User = require('../models/User.model');
-const Comment = require('../models/Comment.model');
+
 
 // load middlware to protect routes:
 const { isLoggedIn } = require('../middleware/route-guard');
@@ -173,8 +173,6 @@ router.post('/books/delete', (req, res, next) => {
                     return;
 
 
-                } else if (user_FromDB.books === 0) {
-                    return;
                 }
             }
 
